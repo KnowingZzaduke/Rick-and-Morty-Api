@@ -1,0 +1,124 @@
+#root {
+  width: 100%;
+}
+.App {
+  text-align: center;
+}
+
+.content_search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+}
+
+.input label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  color: #555555;
+}
+
+.input input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #555555;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.input input::placeholder {
+  color: #999999;
+}
+
+.input input:focus {
+  border-color: #ff6b6b;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff6b6b;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #ff4f4f;
+}
+
+
+.content_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  width: 300px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  height: 443px;
+}
+
+.card .left {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.card .left img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.card .right span {
+  display: block;
+  margin-bottom: 3px;
+  color: black;
+}
+
+.card .right span:first-child {
+  font-weight: bold;
+}
+
+.card .right span:last-child {
+  margin-bottom: 0;
+}
+
+.content_buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.content_buttons svg {
+  font-size: 30px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.content_buttons svg:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+footer{
+  height: 50px;
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+}
