@@ -10,7 +10,8 @@ import {
 function App() {
   const [data, setData] = useState(null);
   const [count, setCount] = useState(1);
-  const [name, setName] = useState(null);
+  const [name, setName] = useState("");
+  const [loader, setLoader] = useState(true);
   const cardVariants = {
     offscreen: {
       y: 200,
@@ -28,39 +29,44 @@ function App() {
     },
   };
 
-
   useEffect(() => {
     const axiosData = async () => {
       try {
         const response = await axios.get(
-          `https://rickandmortyapi.com/api/character`
+          `https://rickandmortyapi.com/api/character/?page${count}`
         );
         setData(response.data.results);
+        setLoader(false)
       } catch (error) {
         console.log(error);
       }
     };
     axiosData();
-  }, []);
+  }, [count]);
   //Guardar los datos en el caché
   const saveCache = useMemo(() => data, [data]);
 
   //Buscador
   const filterData = useCallback((e) => {
     e.preventDefault();
-    console.log(name)
-    if (name === "") {
-      setData(saveCache);
-    } else {
-      const filteredData = saveCache.filter((save) =>
-        save.name.toLowerCase().includes(name.toLowerCase())
-      );
-      if (filteredData) {
-        setData(filteredData);
-      }
+    const filteredData = saveCache.filter((save) =>
+      save.name.toLowerCase().includes(name.toLowerCase())
+    );
+    if (filteredData) {
+      setData(filteredData);
+      setLoader(false);
     }
     [name, saveCache];
   });
+  console.log(loader)
+
+  function backPage() {
+    setCount((prevCount) => (prevCount <= 1 ? 1 : prevCount - 1));
+  }
+
+  function nextPage() {
+    setCount(count + 1);
+  }
 
   function status(status) {
     switch (status) {
@@ -94,7 +100,10 @@ function App() {
           </div>
           <button>Buscar</button>
         </form>
-        <div className="content_buttons"></div>
+        <div className="content_buttons">
+          <FaRegArrowAltCircleLeft onClick={backPage} />
+          <FaRegArrowAltCircleRight onClick={nextPage} />
+        </div>
       </header>
       <div className="content_cards">
         {saveCache?.map((date) => (
@@ -117,11 +126,11 @@ function App() {
           </motion.div>
         ))}
       </div>
-      {saveCache?.length === 0 && <div className="loader"></div>}
+      {loader && <div className="loader"></div>}
 
       <div className="content_buttons">
-        <FaRegArrowAltCircleLeft />
-        <FaRegArrowAltCircleRight />
+        <FaRegArrowAltCircleLeft onClick={backPage} />
+        <FaRegArrowAltCircleRight onClick={nextPage} />
       </div>
       <footer>
         <p>José Luis Arteta Buelvas❤️</p>
