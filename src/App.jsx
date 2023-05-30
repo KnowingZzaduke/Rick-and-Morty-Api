@@ -10,7 +10,7 @@ import {
 function App() {
   const [data, setData] = useState(null);
   const [count, setCount] = useState(1);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(null);
   const cardVariants = {
     offscreen: {
       y: 200,
@@ -28,60 +28,39 @@ function App() {
     },
   };
 
-  useEffect(() => {
-    const getData = localStorage.getItem("data");
-    if (getData) {
-      const parseData = JSON.parse(getData);
-      setData(parseData);
-    }
-  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const axiosData = async () => {
       try {
         const response = await axios.get(
-          `https:rickandmortyapi.com/api/character/?page=${count}`
+          `https://rickandmortyapi.com/api/character`
         );
         setData(response.data.results);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchData();
-  }, [count]);
-
-  useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(data));
-  }, [data]);
-
-  useEffect(() => {
-    const savedCount = localStorage.getItem("count");
-    const parseCount = parseInt(savedCount);
-    if (parseCount) {
-      setCount(parseInt(parseCount));
-    }
+    axiosData();
   }, []);
-  const cachePagination = useMemo(() => data, [count]);
+  //Guardar los datos en el caché
+  const saveCache = useMemo(() => data, [data]);
 
-  function nextPage() {
-    setCount(count + 1);
-  }
-
-  function backPage() {
-    setCount((prevCount) => (prevCount <= 1 ? 1 : prevCount - 1));
-  }
-
-  useEffect(() => {
-    localStorage.setItem("count", count.toString());
-  }, [count]);
-
-  const filterData = useCallback(() => {
+  //Buscador
+  const filterData = useCallback((e) => {
+    e.preventDefault();
+    console.log(name)
     if (name === "") {
-      return data;
+      setData(saveCache);
     } else {
-      return data.filter((date) => date.name.includes(name));
+      const filteredData = saveCache.filter((save) =>
+        save.name.toLowerCase().includes(name.toLowerCase())
+      );
+      if (filteredData) {
+        setData(filteredData);
+      }
     }
-  }, [name]);
+    [name, saveCache];
+  });
 
   function status(status) {
     switch (status) {
@@ -103,7 +82,7 @@ function App() {
     <div className="App">
       <header>
         <h1>Rick and Morty API</h1>
-        <div className="content_search">
+        <form className="content_search" onSubmit={filterData}>
           <div className="input">
             <label htmlFor="search">Search</label>
             <input
@@ -113,15 +92,12 @@ function App() {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <button onClick={filterData}>Buscar</button>
-        </div>
-        <div className="content_buttons">
-          <FaRegArrowAltCircleLeft onClick={backPage} />
-          <FaRegArrowAltCircleRight onClick={nextPage} />
-        </div>
+          <button>Buscar</button>
+        </form>
+        <div className="content_buttons"></div>
       </header>
       <div className="content_cards">
-        {cachePagination?.map((date) => (
+        {saveCache?.map((date) => (
           <motion.div
             className="card"
             key={date.id}
@@ -141,9 +117,11 @@ function App() {
           </motion.div>
         ))}
       </div>
+      {saveCache?.length === 0 && <div className="loader"></div>}
+
       <div className="content_buttons">
-        <FaRegArrowAltCircleLeft onClick={backPage} />
-        <FaRegArrowAltCircleRight onClick={nextPage} />
+        <FaRegArrowAltCircleLeft />
+        <FaRegArrowAltCircleRight />
       </div>
       <footer>
         <p>José Luis Arteta Buelvas❤️</p>
