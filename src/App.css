@@ -5,6 +5,9 @@
   text-align: center;
 }
 
+header img{
+  width: 250px;
+}
 .content_search {
   display: flex;
   align-items: center;
@@ -59,7 +62,7 @@ button:hover {
 
 .content_cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .card {
@@ -121,6 +124,11 @@ footer{
   color: black;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+footer img{
+  width: 50px;
 }
 
 .loader {
