@@ -3,9 +3,6 @@ export function status(status) {
     case "Alive":
       return "🟢";
 
-    case "Died":
-      return "🔴";
-
     case "unknown":
       return "❓";
 

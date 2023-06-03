@@ -59,6 +59,12 @@ button:hover {
   background-color: #ff4f4f;
 }
 
+.status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .content_cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -130,7 +136,7 @@ footer img {
   width: 50px;
 }
 
-.count{
+.count {
   margin-top: 1rem;
 }
 .loader {

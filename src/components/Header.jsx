@@ -18,7 +18,7 @@ export function Header() {
     nextPage,
     results,
     loader,
-    count
+    count,
   } = useContext(DataContext);
 
   //Buscador
@@ -55,9 +55,6 @@ export function Header() {
         </div>
         <button>Buscar</button>
       </form>
-      <div className="count">
-        <span>Page: {count}</span>
-      </div>
       <div className="content_buttons">
         <FaRegArrowAltCircleLeft onClick={backPage} />
         <FaRegArrowAltCircleRight onClick={nextPage} />
@@ -68,6 +65,14 @@ export function Header() {
         </div>
       )}
       {loader && <div className="loader"></div>}
+      <div className="status">
+        <span>Alive: 🟢</span>
+        <span>Dead: ⚫</span>
+        <span>Unknow: ❓</span>
+      </div>
+      <div className="count">
+        <span>Page: {count}</span>
+      </div>
     </header>
   );
 }
