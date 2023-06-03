@@ -5,7 +5,6 @@ Este es un proyecto en donde se hace una petición a la api de Rick and Morty. L
     - Instalación
     - Uso
     - Características
-    - Contribución
     - Créditos
     - Licencia
 
