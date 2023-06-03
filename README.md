@@ -13,7 +13,7 @@ Este es un proyecto en donde se hace una petición a la api de Rick and Morty. L
 ## Instalación
 
 1. Clona el repositorio:
-`$ git clone https://github.com/KnowingZzaduke/Rick-and-Morty-Api`
+```$ git clone https://github.com/KnowingZzaduke/Rick-and-Morty-Api```
 `$ cd Api Rick and Morty`
 
 2. Instala las dependencias 
