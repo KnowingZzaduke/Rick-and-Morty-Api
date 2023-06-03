@@ -13,23 +13,16 @@ Este es un proyecto en donde se hace una petición a la api de Rick and Morty. L
 ## Instalación
 
 1. Clona el repositorio:
-`bash 
-$ git clone https://github.com/KnowingZzaduke/Rick-and-Morty-Api
-$ cd Api Rick and Morty
-`
+`$ git clone https://github.com/KnowingZzaduke/Rick-and-Morty-Api`
+`$ cd Api Rick and Morty`
 
 2. Instala las dependencias 
-`
-bash
-$ npm install
-`
+`$ npm install`
 
 ## Uso
 
 3. Iniciar la aplicación
-`bash
-$ npm run dev
-`
+`$ npm run dev`
 
 4. Abre tu navegardor en el puerto http://127.0.0.1:5173/
 
