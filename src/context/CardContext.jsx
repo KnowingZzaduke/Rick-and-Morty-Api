@@ -19,10 +19,12 @@ export function DataContextProvider(props) {
   //Guardar los datos en el caché
   const saveCache = useMemo(() => data, [data]);
 
+  //Función para pasar a la página siguiente
   function nextPage() {
     setCount(count + 1);
   }
-
+  
+  //Función para pasar a la página siguiente
   function backPage() {
     setCount((prevCount) => (prevCount <= 1 ? 1 : prevCount - 1));
   }
